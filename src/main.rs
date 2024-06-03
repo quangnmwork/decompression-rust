@@ -1,7 +1,16 @@
-use std::{fs, io};
+mod args;
 
+use std::{fs, io};
+use clap::Parser;
+use args::Args;
 
 fn main() {
+    let arg_vars = Args::parse();
+
+    for _ in 0..arg_vars.count {
+        println!("Hello {}!", arg_vars.name)
+    }
+
     let file = fs::File::open("compress3.zip").unwrap();
     let mut archive = zip::ZipArchive::new(file).unwrap();
 
